@@ -96,7 +96,9 @@ void* memset(void* const s __pass_object_size0, int c, size_t n)
                          "'memset' called with size bigger than buffer")
         /* If you're a user who wants this warning to go away: use `(&memset)(foo, bar, baz)`. */
         __clang_warning_if(c && !n, "'memset' will set 0 bytes; maybe the arguments got flipped?") {
-    return __builtin___memset_chk(s, c, n, __bos0(s));
+    void *a = __builtin___memset_chk(s, c, n, __bos0(s));
+    __asm__ __volatile__("" : : "r"(a) : "memory");
+    return a;
 }
 #endif /* __ANDROID_API__ >= __ANDROID_API_J_MR1__ */
 
