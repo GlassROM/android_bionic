@@ -41,10 +41,6 @@ void set_application_target_sdk_version(int target) {
     target = __ANDROID_API__;
   }
   g_target_sdk_version = target;
-
-  if (target < 30) {
-    android_fdsan_set_error_level_from_property(ANDROID_FDSAN_ERROR_LEVEL_WARN_ONCE);
-  }
 }
 
 int get_application_target_sdk_version() {
